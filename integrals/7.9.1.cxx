@@ -51,8 +51,9 @@ int main()
     
     integral = 0;
     h = 0.25;
+
     //Формула трапеций:
-    for(int i = 0; i < data.size() - 1; i += 2)
+    for(int i = 0; i < data.size() - 1; ++i)
     {
         integral += h/2 * (data[i].second + data[i + 1].second);
     }
@@ -62,10 +63,12 @@ int main()
     h = 0.5;
     new_integral = 0;
 
-    for(int i = 0; i < data.size() - 1; i += 4)
+    // Уточняем наш интеграл с помощью экстраполяции Ричардсона
+    for(int i = 0; i < data.size() - 1; i += 2)
     {
         new_integral += h/2 * (data[i].second + data[i + 1].second);
     }
+
     specified_integral = integral + (integral - new_integral)/(4 - 1) ;
     std::cout << "Интеграл, уточненный с помощью интерполяции Ричардсона: " << specified_integral << "\n";
 
